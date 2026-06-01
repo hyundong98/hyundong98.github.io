@@ -60,7 +60,7 @@ function getDisplayDate(publication: Publication): string {
   const month = publication.month ? monthAliases[publication.month] : "";
 
   if (year && month) {
-    return `${year} ${month}`;
+    return `${month} ${year}`;
   }
 
   return String(year || month);
