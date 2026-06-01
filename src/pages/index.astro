@@ -1,0 +1,245 @@
+---
+import Layout from "../layouts/Layout.astro";
+import profile from "../data/profile.json";
+import researchInterests from "../data/researchInterests.json";
+import {
+  selectedPublications,
+  type DisplayPublication,
+} from "../utils/publications";
+import { latestNews, formatNewsDate } from "../utils/news";
+import { getLastCommitDate, formatCommitDate } from "../utils/git";
+
+const lastCommitDate = getLastCommitDate();
+
+function authorList(pub: DisplayPublication) {
+  return pub.authors
+    .map((author) => author.me ? `<strong>${author.name}</strong>` : author.name)
+    .join(", ");
+}
+
+function venueLine(pub: DisplayPublication) {
+  const venue = pub.displayVenue;
+  const date = pub.displayDate;
+  const details = pub.displayDetails;
+
+  const venueWithDate =
+    venue && date
+      ? `${venue}, ${date}`
+      : venue || date;
+
+  const base =
+    pub.toAppear && venue
+      ? `To appear in ${venueWithDate}`
+      : venueWithDate;
+
+  return details ? `${base}, ${details}` : base;
+}
+
+const contactLinks = [
+  {
+    key: "email",
+    label: "Email",
+    href: `mailto:${profile.email}`,
+    text: "Email",
+    icon: "/icons/email.svg",
+  },
+  {
+    key: "linkedin",
+    label: "LinkedIn",
+    href: profile.links.linkedin,
+    text: "LinkedIn",
+    icon: "/icons/linkedin.svg",
+  },
+].filter((x) => x.href);
+
+const profileLinks = [
+  {
+    key: "github",
+    label: "GitHub",
+    href: profile.links.github,
+    text: "GitHub",
+    icon: "/icons/github.svg",
+  },
+  {
+    key: "orcid",
+    label: "ORCID",
+    href: profile.links.orcid,
+    text: "ORCID",
+    icon: "/icons/orcid.svg",
+  },
+  {
+    key: "google_scholar",
+    label: "Google Scholar",
+    href: profile.links.google_scholar,
+    text: "Google Scholar",
+    icon: "/icons/google-scholar.svg",
+  },
+  {
+    key: "semantic_scholar",
+    label: "Semantic Scholar",
+    href: profile.links.semantic_scholar,
+    text: "Semantic Scholar",
+    icon: "/icons/semantic-scholar.svg",
+  },
+  {
+    key: "dblp",
+    label: "DBLP",
+    href: profile.links.dblp,
+    text: "DBLP",
+    icon: "/icons/dblp.svg",
+  },
+].filter((x) => x.href);
+---
+
+<Layout title={profile.name.en} pageClass="home-page">
+  <div class="home-layout">
+    <aside class="profile-sidebar no-print">
+      <div class="avatar-wrap">
+        <img
+          class="avatar"
+          src={profile.photo || "/images/profile.jpg"}
+          alt={`${profile.name.en} profile photo`}
+          onerror="this.style.display='none'; this.nextElementSibling.style.display='block';"
+        />
+        <div class="avatar avatar-empty" style="display: none;"></div>
+      </div>
+
+      <div class="profile-summary">
+        <div class="profile-name">{profile.name.en}</div>
+        <p class="profile-role">
+          {profile.name.ko} · {profile.title}
+        </p>
+        <p class="profile-meta">
+          {profile.major} {profile.status} at {profile.affiliation}
+        </p>
+      </div>
+
+      <section class="contact-panel" aria-labelledby="contact-title">
+        <h2 id="contact-title">Contact</h2>
+        <div class="icon-links" aria-label="Contact links">
+          {contactLinks.map((link) => (
+            <a
+              class="profile-link-chip"
+              href={link.href}
+              aria-label={link.label}
+              title={link.label}
+              target={link.key === "email" ? undefined : "_blank"}
+              rel={link.key === "email" ? undefined : "noreferrer"}
+            >
+              {link.icon && <img class="profile-link-icon" src={link.icon} alt="" />}
+              <span>{link.text}</span>
+            </a>
+          ))}
+        </div>
+      </section>
+    </aside>
+
+    <div class="main-column">
+      <section class="main-section" id="about-me">
+        <h2>About Me</h2>
+        <p class="lead">
+          Hello, I’m Hyundong Jin, a Ph.D. student at Yonsei University. I work on
+          large language models, with a particular interest in connecting formal
+          language theory and language modeling.
+          This personal website collects my publications, accepted papers,
+          preprints, code, and academic profiles.
+        </p>
+        <div class="icon-links" aria-label="Profile links">
+          {profileLinks.map((link) => (
+            <a
+              class="profile-link-chip"
+              href={link.href}
+              aria-label={link.label}
+              title={link.label}
+              target={link.key === "email" ? undefined : "_blank"}
+              rel={link.key === "email" ? undefined : "noreferrer"}
+            >
+              {link.icon && <img class="profile-link-icon" src={link.icon} alt="" />}
+              <span>{link.text}</span>
+            </a>
+          ))}
+        </div>
+      </section>
+
+      <section class="main-section" id="research-interest">
+        <h2>Research Interest</h2>
+        <ul class="simple-list">
+          {researchInterests.map((interest) => (
+            <li>{interest}</li>
+          ))}
+        </ul>
+      </section>
+
+      <section class="main-section" id="news">
+        <h2>News</h2>
+        {latestNews.length > 0 ? (
+          <ul class="news-list">
+            {latestNews.map((item) => (
+              <li>
+                <time datetime={item.date}>{formatNewsDate(item.date)}</time>
+                <span>{item.message}</span>
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <p class="muted">Add news items to <code>src/data/news.json</code>.</p>
+        )}
+      </section>
+
+      <section class="main-section" id="selected-publications">
+        <div class="section-head compact">
+          <h2>Selected Publications</h2>
+          <a class="pill" href="/publications">All Publications</a>
+        </div>
+      
+        {selectedPublications.length > 0 ? (
+          <div class="paper-list compact-paper-list">
+            {selectedPublications.map((pub) => (
+              <article class="paper compact-paper">
+                <div class="paper-title">
+                  <span class={`publication-tag publication-tag-${pub.entryType}`}>
+                    {pub.typeLabel}
+                  </span>
+                  {pub.title}
+                </div>
+      
+                <div class="authors" set:html={authorList(pub)} />
+                <div class="venue">
+                  {venueLine(pub)}
+                </div>
+      
+                {(pub.displayUrl || pub.displayCode) && (
+                  <div class="paper-links">
+                    {pub.displayUrl && (
+                      <a class="pill" href={pub.displayUrl} target="_blank" rel="noreferrer">
+                        URL
+                      </a>
+                    )}
+      
+                    {pub.displayCode && (
+                      <a class="pill" href={pub.displayCode} target="_blank" rel="noreferrer">
+                        Code
+                      </a>
+                    )}
+                  </div>
+                )}
+              </article>
+            ))}
+          </div>
+        ) : (
+          <p class="muted">
+            Add <code>selected = &#123;true&#125;</code> to entries in
+            <code>src/data/publications.bib</code>.
+          </p>
+        )}
+      </section>
+        
+      <section class="main-section" id="last-update">
+        <h2>Last Update</h2>
+        <p class="muted">
+          <time datetime={lastCommitDate}>{formatCommitDate(lastCommitDate)}</time>
+        </p>
+      </section>
+    </div>
+  </div>
+</Layout>

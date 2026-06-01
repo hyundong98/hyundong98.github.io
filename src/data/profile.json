@@ -1,0 +1,21 @@
+{
+  "name": {
+    "ko": "진현동",
+    "en": "Hyundong Jin"
+  },
+  "title": "AI Researcher",
+  "major": "Computer Science",
+  "status": "Ph.D student",
+  "affiliation": "Yonsei University",
+  "email": "tuzi04@yonsei.ac.kr",
+  "photo": "/images/profile.png",
+  "links": {
+    "github": "https://github.com/hyundong98",
+    "orcid": "https://orcid.org/0000-0002-5558-3317",
+    "google_scholar": "https://scholar.google.com/citations?user=zxUo7igAAAAJ&hl",
+    "semantic_scholar": "https://www.semanticscholar.org/author/Hyundong-Jin/2275752028",
+    "dblp": "https://dblp.org/pid/314/4465.html",
+    "linkedin": "https://www.linkedin.com/in/hyundong-jin-babb60382",
+    "linkedin_user": "hyundong-jin-babb60382"
+  }
+}

@@ -1,0 +1,171 @@
+---
+import Layout from "../layouts/Layout.astro";
+import profile from "../data/profile.json";
+import researchInterests from "../data/researchInterests.json";
+import cv from "../data/cv.json";
+import {
+  publications,
+  type DisplayPublication,
+} from "../utils/publications";
+
+const educationItems = cv.education;
+const experienceItems = cv.experience;
+const skillItems = cv.skills;
+
+const cvPublications = publications
+  .filter((pub) =>
+    ["inproceedings", "article", "book"].includes(pub.entryType)
+  )
+  .sort((a, b) => b.year - a.year || (b.month ?? 0) - (a.month ?? 0));
+
+const toAppear = publications
+  .filter((pub) => pub.toAppear)
+  .sort((a, b) => b.year - a.year || (b.month ?? 0) - (a.month ?? 0));
+
+function authorList(pub: DisplayPublication) {
+  return pub.authors.map((author) => author.name).join(", ");
+}
+
+function venueLine(pub: DisplayPublication) {
+  const venue = pub.displayVenue;
+  const date = pub.displayDate;
+  const details = pub.displayDetails;
+
+  const venueWithDate =
+    venue && date
+      ? `${venue}, ${date}`
+      : venue || date;
+
+  const base =
+    pub.toAppear && venue
+      ? `To appear in ${venueWithDate}`
+      : venueWithDate;
+
+  return details ? `${base}, ${details}` : base;
+}
+
+const profileItems = [
+  {
+    label: "GitHub",
+    href: profile.links.github,
+  },
+  {
+    label: "ORCID",
+    href: profile.links.orcid,
+  },
+  {
+    label: "Google Scholar",
+    href: profile.links.google_scholar,
+  },
+  {
+    label: "Semantic Scholar",
+    href: profile.links.semantic_scholar,
+  },
+  {
+    label: "DBLP",
+    href: profile.links.dblp,
+  },
+].filter((item) => item.href);
+---
+
+<Layout title={`CV · ${profile.name.en}`} cvPage={true}>
+  <section class="cv-section">
+    <section class="sub-section">
+      <h1>{profile.name.en}</h1>
+      <p>Email: {profile.email}</p>
+      <p>LinkedIn: {profile.links.linkedin_user}</p>
+    </section>
+
+    <section class="sub-section">
+      <h4>Profiles</h4>
+      <ul class="push">
+        {profileItems.map((item) => (
+          <li>
+            {item.label}: <a href={item.href} target="_blank" rel="noreferrer">{item.href}</a>
+          </li>
+        ))}
+      </ul>
+    </section>
+
+    <section class="sub-section">
+      <h4>Research Interests</h4>
+      <ul class="push">
+        {researchInterests.map((interest) => (
+          <li>{interest}</li>
+        ))}
+      </ul>
+    </section>
+
+    <section class="sub-section">
+      <h4>Education</h4>
+      <div class="cv-entry-list">
+        {educationItems.map((education) => (
+          <div class="cv-entry">
+            <div>
+              <strong>{education.institution}</strong>
+              {education.location && <>, {education.location}</>}
+            </div>
+    
+            <div class="cv-detail-list">
+              {education.details.map((detail) => (
+                <div class="cv-entry-head">
+                  <span>{detail.degree}</span>
+                  <span>{detail.period}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+    
+    <section class="sub-section">
+      <h4>Experience</h4>
+      <div class="cv-entry-list">
+        {experienceItems.map((item) => (
+          <div class="cv-entry">
+            <div class="cv-entry-head">
+              <strong>{item.title}</strong>
+              <span>{item.period}</span>
+            </div>
+            <div class="cv-entry-head">
+              <span>
+                {item.organization}
+                {item.location && <>, {item.location}</>}
+              </span>
+              {item.supervisor && (
+                <span class="cv-supervisor">
+                  Advisor: {item.supervisor}
+                </span>
+              )}
+            </div>
+            {item.description && (
+              <div class="muted">
+                {item.description}
+              </div>
+            )}
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <section class="sub-section">
+    <h4>Publications</h4>
+    {cvPublications.map((pub) => (
+      <div class="cv-entry">
+        <strong>{pub.title}</strong><br />
+        {authorList(pub)}<br />
+        <span class="muted">{venueLine(pub)}</span>
+      </div>
+    ))}
+    </section>
+
+    <section class="sub-section">
+      <h4>Skills</h4>
+      <p class="push">
+        {skillItems.join(", ")}
+      </p>
+    </section>
+
+  </section>
+</Layout>

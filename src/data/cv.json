@@ -1,0 +1,45 @@
+{
+    "education": [
+      {
+        "institution": "Yonsei University",
+        "location": "Seoul, South Korea",
+        "details":[
+            {
+                "degree": "Ph.D. student in Department of Computer Science",
+                "period": "Sep.2024–Present"
+            },
+            {
+                "degree": "B.E. in Chemical Engineering and Computer Science (Double Major)",
+                "period": "Sep.2017–Aug.2024"
+            }
+        ]
+      }
+    ],
+    "experience": [
+      {
+        "title": "Research Intern",
+        "organization": "Theory of Computation Lab., Yonsei University",
+        "location": "Seoul, South Korea",
+        "period": "Jan.2024–Aug.2024",
+        "supervisor": "Prof. Yo-Sub Han",
+        "description": "Research on classification of LLM-paraphrased code"
+      },
+      {
+        "title": "Research Intern",
+        "organization": "Big Data Analytics Lab., Yonsei University",
+        "location": "Seoul, South Korea",
+        "period": "Mar.2022–Feb.2023",
+        "supervisor": "Prof. Noseong Park",
+        "description": "Research on image classification and neural ODEs"
+      }
+    ],
+    "skills": [
+      "Python",
+      "Java",
+      "C++",
+      "C",
+      "MATLAB",
+      "PyTorch",
+      "Transformers"
+    ]
+  }

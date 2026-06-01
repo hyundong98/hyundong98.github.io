@@ -1,0 +1,24 @@
+{
+  "ICLR": "Proceedings of the International Conference on Learning Representations (ICLR)",
+  "NeurIPS": "Advances in Neural Information Processing Systems (NeurIPS)",
+  "ICML": "Proceedings of the International Conference on Machine Learning (ICML)",
+  "AAAI": "Proceedings of the AAAI Conference on Artificial Intelligence (AAAI)",
+  "IJCAI": "Proceedings of the International Joint Conference on Artificial Intelligence (IJCAI)",
+
+  "ACL": "Proceedings of the Annual Meeting of the Association for Computational Linguistics (ACL)",
+  "EMNLP": "Proceedings of the Conference on Empirical Methods in Natural Language Processing (EMNLP)",
+  "COLING": "Proceedings of the Conference on Computational Linguistics (COLING)",
+  "NAACL": "Proceedings of the Conference of the Nations of the Americas Chapter of the Association for Computational Linguistics (NAACL)",
+  "EACL": "Proceedings of the Conference of the European Chapter of the Association for Computational Linguistics (EACL)",
+
+  "EAAI": "Engineering Applications of Artificial Intelligence (EAAI)",
+
+  "ACL_findings": "Findings of the Annual Meeting of the Association for Computational Linguistics (ACL-findings)",
+  "EMNLP_findings": "Findings of the Conference on Empirical Methods in Natural Language Processing (EMNLP-findings)",
+  "COLING_findings": "Findings of the Conference on Computational Linguistics (COLING-findings)",
+  "NAACL_findings": "Findings of the Conference of the Nations of the Americas Chapter of the Association for Computational Linguistics (NAACL-findings)",
+  "EACL_findings": "Findings of the Conference of the European Chapter of the Association for Computational Linguistics (EACL-findings)",
+
+  "DLT":"Proceedings of the International Conference on Developments in Language Theory (DLT)",
+  "CIAA":"Proceedings of the International Conference on Implementation and Application of Automata (CIAA)"
+}

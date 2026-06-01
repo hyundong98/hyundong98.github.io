@@ -1,0 +1,71 @@
+---
+import Layout from "../layouts/Layout.astro";
+import {
+  publicationGroups,
+  type DisplayPublication,
+} from "../utils/publications";
+
+function authorList(pub: DisplayPublication) {
+  return pub.authors
+    .map((author) => author.me ? `<strong>${author.name}</strong>` : author.name)
+    .join(", ");
+}
+
+function venueLine(pub: DisplayPublication) {
+  const venue = pub.displayVenue;
+  const date = pub.displayDate;
+  const details = pub.displayDetails;
+
+  const venueWithDate =
+    venue && date
+      ? `${venue}, ${date}`
+      : venue || date;
+
+  const base =
+    pub.toAppear && venue
+      ? `To appear in ${venueWithDate}`
+      : venueWithDate;
+
+  return details ? `${base}, ${details}` : base;
+}
+---
+
+<Layout title="Publications · Hyundong Jin">
+  <h1>Publications</h1>
+
+  <div class="publication-type-stack">
+    {publicationGroups.map((group) => (
+      <section class="publication-type-section" aria-labelledby={`publications-${group.entryType}`}>
+        <div class="section-head publication-type-heading">
+          <h2 id={`publications-${group.entryType}`}>{group.label}</h2>
+        </div>
+
+        <div class="paper-list compact-paper-list">
+              {group.items.map((pub) => (
+                <article class="paper compact-paper">
+                  <div class="paper-title">{pub.title}</div>
+                  <div class="authors" set:html={authorList(pub)} />
+                  <div class="venue">{venueLine(pub)}</div>
+
+              {(pub.displayUrl || pub.displayCode) && (
+                <div class="paper-links">
+                  {pub.displayUrl && (
+                    <a class="pill" href={pub.displayUrl} target="_blank" rel="noreferrer">
+                      URL
+                    </a>
+                  )}
+
+                  {pub.displayCode && (
+                    <a class="pill" href={pub.displayCode} target="_blank" rel="noreferrer">
+                      Code
+                    </a>
+                  )}
+                </div>
+              )}
+            </article>
+          ))}
+        </div>
+      </section>
+    ))}
+  </div>
+</Layout>
