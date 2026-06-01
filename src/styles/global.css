@@ -242,7 +242,7 @@ h3 {
 
 .cv-page {
   /* background: #fff; */
-  background: color-mix(in srgb, var(--bg) 84%, transparent),
+  background: color-mix(in srgb, var(--bg) 84%, transparent);
 }
 
 .cv-page main {
@@ -646,10 +646,39 @@ a:visited {
 .cv-entry-head {
   display: flex;
   justify-content: space-between;
-  gap: 1rem;
+  align-items: baseline;
+  gap: 0.35rem 0.75rem;
 }
 
-.cv-entry-head span {
+.cv-entry-head > strong,
+.cv-entry-head > span:first-child {
+  min-width: 0;
+  flex: 1 1 auto;
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+
+.cv-entry-head > span:last-child {
+  flex: 0 0 auto;
+  white-space: nowrap;
+}
+
+.cv-entry-org-line {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 0.1rem 0.75rem;
+}
+
+.cv-entry-org-line > span:first-child {
+  min-width: min(100%, 22rem);
+  flex: 1 1 auto;
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+
+.cv-entry-org-line > .cv-supervisor {
   flex: 0 0 auto;
   white-space: nowrap;
 }
