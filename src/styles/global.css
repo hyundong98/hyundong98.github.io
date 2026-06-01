@@ -690,3 +690,16 @@ a:visited {
   letter-spacing: 0.01em;
   white-space: nowrap;
 }
+
+.cv-profiles,
+.cv-profiles ul,
+.cv-profiles li,
+.cv-profiles a {
+  min-width: 0;
+}
+
+.cv-profiles li,
+.cv-profiles a {
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
