@@ -1,43 +1,95 @@
-# Astro Starter Kit: Minimal
+# Hyundong Jin — Personal Academic Website
 
-```sh
-npm create astro@latest -- --template minimal
+This repository contains the source code for my personal academic website, built with [Astro](https://astro.build/) and deployed with GitHub Pages.
+
+## Website
+
+Visit the site here:
+
+https://hyundong98.github.io/
+
+## Tech Stack
+
+- Astro
+- HTML / CSS / TypeScript
+- GitHub Pages
+- GitHub Actions
+
+## Local Development
+
+Install dependencies:
+
+```bash
+npm install
 ```
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+Start the local development server:
 
-## 🚀 Project Structure
+```bash
+npm run dev
+```
 
-Inside of your Astro project, you'll see the following folders and files:
+Build the site:
+
+```bash
+npm run build
+```
+
+Preview the production build locally:
+
+```bash
+npm run preview
+```
+
+## Deployment
+
+The site is deployed to GitHub Pages using GitHub Actions.
+
+When changes are pushed to the `main` branch, the site is automatically built and deployed.
+
+## Project Structure
 
 ```text
-/
+.
+├── .github/
+│   └── workflows/
+│       └── deploy.yml
+├── .vscode/
 ├── public/
+│   ├── icons/
+│   ├── images/
+│   ├── favicon.ico
+│   └── favicon.svg
 ├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
+│   ├── data/
+│   │   ├── cv.json
+│   │   ├── examples.bib
+│   │   ├── news.json
+│   │   ├── profile.json
+│   │   ├── publications.bib
+│   │   ├── researchInterests.json
+│   │   └── venueAliases.json
+│   ├── layouts/
+│   │   └── Layout.astro
+│   ├── pages/
+│   │   ├── cv.astro
+│   │   ├── index.astro
+│   │   └── publications.astro
+│   ├── styles/
+│   │   └── global.css
+│   └── utils/
+│       ├── bibtex.ts
+│       ├── git.ts
+│       ├── news.ts
+│       └── publications.ts
+├── .gitignore
+├── astro.config.mjs
+├── package-lock.json
+├── package.json
+├── README.md
+└── tsconfig.json
 ```
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+## Notes
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
-
-Any static assets, like images, can be placed in the `public/` directory.
-
-## 🧞 Commands
-
-All commands are run from the root of the project, from a terminal:
-
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+This website includes information about my research, CV, publications, and projects.
