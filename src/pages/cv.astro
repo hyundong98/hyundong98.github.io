@@ -102,15 +102,14 @@ const profileItems = [
         {educationItems.map((education) => (
           <div class="cv-entry">
             <div>
-              <strong>{education.institution}</strong>
-              {education.location && <>, {education.location}</>}
+              <strong>{education.institution}</strong>{education.location ? `, ${education.location}` : ''}
             </div>
     
             <div class="cv-detail-list">
               {education.details.map((detail) => (
-                <div class="cv-entry-head">
+                <div class="cv-entry-head cv-entry-org-line">
                   <span>{detail.degree}</span>
-                  <span>{detail.period}</span>
+                  <span class="cv-period">{detail.period}</span>
                 </div>
               ))}
             </div>
@@ -126,12 +125,11 @@ const profileItems = [
           <div class="cv-entry">
             <div class="cv-entry-head">
               <strong>{item.title}</strong>
-              <span>{item.period}</span>
+              <span class="cv-period">{item.period}</span>
             </div>
             <div class="cv-entry-head cv-entry-org-line">
               <span>
-                {item.organization}
-                {item.location && <>, {item.location}</>}
+                {item.organization}{item.location ? `, ${item.location}` : ''}
               </span>
               {item.supervisor && (
                 <span class="cv-supervisor">

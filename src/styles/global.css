@@ -682,3 +682,11 @@ a:visited {
   flex: 0 0 auto;
   white-space: nowrap;
 }
+
+.cv-period {
+  font-size: 0.9em;
+  font-weight: 500;
+  color: var(--muted);
+  letter-spacing: 0.01em;
+  white-space: nowrap;
+}
